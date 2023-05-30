@@ -57,6 +57,14 @@
                 </a>
             </li>
             @endcan
+            @can('folder_access')
+                <li class="{{ $request->segment(2) == 'sku' ? 'active' : '' }}">
+                    <a href="{{ route('admin.sku.index') }}">
+                        <i class="fa fa-gears"></i>
+                        <span class="title">SKUs</span>
+                    </a>
+                </li>
+            @endcan
             
             @can('file_access')
             <li class="{{ $request->segment(2) == 'files' ? 'active' : '' }}">

@@ -4,17 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\File;
 use App\Folder;
-use Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreFoldersRequest;
 use App\Http\Requests\Admin\UpdateFoldersRequest;
-use Illuminate\Support\Facades\Session;
+use App\Models\Sku;
+use Request;
 use Illuminate\Http\Request as NRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Session;
 
-
-class FoldersController extends Controller
+class SkuController extends Controller
 {
     /**
      * Display a listing of Folder.
@@ -23,15 +23,14 @@ class FoldersController extends Controller
      */
     public function index()
     {
-
         if (! Gate::allows('folder_access')) {
             return abort(401);
         }
         if ($filterBy = Request::get('filter')) {
             if ($filterBy == 'all') {
-                Session::put('Folder.filter', 'all');
+                Session::put('Sku.filter', 'all');
             } elseif ($filterBy == 'my') {
-                Session::put('Folder.filter', 'my');
+                Session::put('Sku.filter', 'my');
             }
         }
 
@@ -39,12 +38,12 @@ class FoldersController extends Controller
             if (! Gate::allows('folder_delete')) {
                 return abort(401);
             }
-            $folders = Folder::onlyTrashed()->get();
+            $sku = Sku::onlyTrashed()->get();
         } else {
-            $folders = Folder::all();
+            $sku = Sku::all();
         }
 
-        return view('admin.folders.index', compact('folders'));
+        return view('admin.sku.index', compact('sku'));
     }
 
     /**
@@ -57,10 +56,10 @@ class FoldersController extends Controller
         if (! Gate::allows('folder_create')) {
             return abort(401);
         }
-        
+
         $created_bies = \App\User::get()->pluck('name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
 
-        return view('admin.folders.create', compact('created_bies'));
+        return view('admin.sku.create', compact('created_bies'));
     }
 
     /**
@@ -74,11 +73,11 @@ class FoldersController extends Controller
         if (! Gate::allows('folder_create')) {
             return abort(401);
         }
-        $folder = Folder::create($request->all());
+        $folder = Sku::create($request->all());
 
 
 
-        return redirect()->route('admin.folders.index');
+        return redirect()->route('admin.sku.index');
     }
 
 
@@ -93,7 +92,7 @@ class FoldersController extends Controller
         if (! Gate::allows('folder_edit')) {
             return abort(401);
         }
-        
+
         $created_bies = \App\User::get()->pluck('name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
 
         $folder = Folder::findOrFail($id);
@@ -133,7 +132,7 @@ class FoldersController extends Controller
         if (! Gate::allows('folder_view')) {
             return abort(401);
         }
-        
+
         $created_bies = \App\User::get()->pluck('name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');$files = \App\File::where('folder_id', $id)->get();
 
         $folder = Folder::findOrFail($id);

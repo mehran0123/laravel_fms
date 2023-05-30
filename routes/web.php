@@ -34,6 +34,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('folders_mass_destroy', ['uses' => 'Admin\FoldersController@massDestroy', 'as' => 'folders.mass_destroy']);
     Route::post('folders_restore/{id}', ['uses' => 'Admin\FoldersController@restore', 'as' => 'folders.restore']);
     Route::delete('folders_perma_del/{id}', ['uses' => 'Admin\FoldersController@perma_del', 'as' => 'folders.perma_del']);
+
+    //*** SKU ***//
+    Route::resource('sku', 'Admin\SkuController');
+    Route::post('sku_mass_destroy', ['uses' => 'Admin\SkuController@massDestroy', 'as' => 'sku.mass_destroy']);
+    Route::post('sku_restore/{id}', ['uses' => 'Admin\SkuController@restore', 'as' => 'sku.restore']);
+    Route::delete('sku_perma_del/{id}', ['uses' => 'Admin\SkuController@perma_del', 'as' => 'sku.perma_del']);
+
+
+
     Route::resource('files', 'Admin\FilesController');
     Route::get('/{uuid}/download', 'Admin\DownloadsController@download');
     Route::post('files_mass_destroy', ['uses' => 'Admin\FilesController@massDestroy', 'as' => 'files.mass_destroy']);
