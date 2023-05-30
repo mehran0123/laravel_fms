@@ -153,10 +153,10 @@ class SkuController extends Controller
         if (! Gate::allows('folder_delete')) {
             return abort(401);
         }
-        $folder = Folder::findOrFail($id);
+        $folder = Sku::findOrFail($id);
         $folder->delete();
 
-        return redirect()->route('admin.folders.index');
+        return redirect()->route('admin.sku.index');
     }
 
     /**
