@@ -84,7 +84,7 @@
         'style' => 'display: inline-block;',
         'method' => 'POST',
         'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
-        'route' => ['admin.folders.restore', $folder->id])) !!}
+        'route' => ['admin.sku.restore', $folder->id])) !!}
                                         {!! Form::submit(trans('quickadmin.qa_restore'), array('class' => 'btn btn-xs btn-success')) !!}
                                         {!! Form::close() !!}
                                     @endcan
@@ -93,7 +93,7 @@
         'style' => 'display: inline-block;',
         'method' => 'DELETE',
         'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
-        'route' => ['admin.folders.perma_del', $folder->id])) !!}
+        'route' => ['admin.sku.perma_del', $folder->id])) !!}
                                         {!! Form::submit(trans('quickadmin.qa_permadel'), array('class' => 'btn btn-xs btn-danger')) !!}
                                         {!! Form::close() !!}
                                     @endcan
@@ -101,14 +101,14 @@
                             @else
                                 <td>
                                     @can('folder_edit')
-                                        <a href="{{ route('admin.folders.edit',[$folder->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
+                                        <a href="{{ route('admin.sku.edit',[$folder->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
                                     @endcan
                                     @can('folder_delete')
                                         {!! Form::open(array(
                                                                                 'style' => 'display: inline-block;',
                                                                                 'method' => 'DELETE',
                                                                                 'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
-                                                                                'route' => ['admin.folders.destroy', $folder->id])) !!}
+                                                                                'route' => ['admin.sku.destroy', $folder->id])) !!}
                                         {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                         {!! Form::close() !!}
                                     @endcan
@@ -137,7 +137,7 @@
     </script>
     <script>
         @can('folder_delete')
-                @if ( request('show_deleted') != 1 ) window.route_mass_crud_entries_destroy = '{{ route('admin.folders.mass_destroy') }}'; @endif
+                @if ( request('show_deleted') != 1 ) window.route_mass_crud_entries_destroy = '{{ route('admin.sku.mass_destroy') }}'; @endif
         @endcan
 
     </script>

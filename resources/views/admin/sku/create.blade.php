@@ -32,12 +32,12 @@
                     @endif
                 </div>
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('sale_person', 'Product Sales Person'.'*', ['class' => 'control-label']) !!}
-                    {!! Form::text('sale_person', old('sale_person'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    {!! Form::label('sales_person', 'Product Sales Person'.'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('sales_person', old('sales_person'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
-                    @if($errors->has('sale_person'))
+                    @if($errors->has('sales_person'))
                         <p class="help-block">
-                            {{ $errors->first('sale_person') }}
+                            {{ $errors->first('sales_person') }}
                         </p>
                     @endif
                 </div>

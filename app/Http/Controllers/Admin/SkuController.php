@@ -95,9 +95,9 @@ class SkuController extends Controller
 
         $created_bies = \App\User::get()->pluck('name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
 
-        $folder = Folder::findOrFail($id);
+        $sku = Sku::findOrFail($id);
 
-        return view('admin.folders.edit', compact('folder', 'created_bies'));
+        return view('admin.sku.edit', compact('sku', 'created_bies'));
     }
 
     /**
@@ -112,12 +112,12 @@ class SkuController extends Controller
         if (! Gate::allows('folder_edit')) {
             return abort(401);
         }
-        $folder = Folder::findOrFail($id);
-        $folder->update($request->all());
+        $sku = Sku::findOrFail($id);
+        $sku->update($request->all());
 
 
 
-        return redirect()->route('admin.folders.index');
+        return redirect()->route('admin.sku.index');
     }
 
 
